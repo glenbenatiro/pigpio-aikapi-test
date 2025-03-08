@@ -54,7 +54,6 @@ data_loopback_using_aikapi(std::string& msg)
   auto aux_spi = ap.aux.spi(0);
 
   aux_spi.enable();
-  aux_spi.mode(AP::SPI::MODE::_0);
   aux_spi.frequency(BAUD);
 
   std::vector<char> rx_buff{};
@@ -77,15 +76,13 @@ main()
 
   std::cout << "Sending message through SPI using pigpio..." << "\n\n";
 
-  std::string pigpio_response = data_loopback_using_pigpio(msg);
-
-  std::cout << "The received string is: " << pigpio_response << "\n\n";
+  std::cout << "The received string is: " << data_loopback_using_pigpio(msg)
+            << "\n\n";
 
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
   std::cout << "Sending message through SPI using AikaPi..." << "\n\n";
 
-  std::string aikapi_response = data_loopback_using_aikapi(msg);
-
-  std::cout << "The received string is: " << aikapi_response << "\n\n";
+  std::cout << "The received string is: " << data_loopback_using_aikapi(msg)
+            << "\n\n";
 }
